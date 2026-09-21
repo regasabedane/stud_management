@@ -1,3 +1,21 @@
+<?php if (isset($_GET['status'])): ?>
+    <?php if ($_GET['status'] == 'created'): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            Barataan milkaa'inaan galmee'era!
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php elseif ($_GET['status'] == 'updated'): ?>
+        <div class="alert alert-info alert-dismissible fade show" role="alert">
+            Odeeffannoon barataa fooyya'eera!
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php elseif ($_GET['status'] == 'deleted'): ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Barataan haqaameera!
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
 <?php require_once 'db.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,29 +31,28 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">Student Management System</h2>
 
-
     <!-- Alert Messages -->
-<?php if (isset($_GET['status'])): ?>
-    <?php if ($_GET['status'] == 'success'): ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Barataan milkaa'inaan galmaa'era!
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    <?php elseif ($_GET['status'] == 'deleted'): ?>
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            Barataan haqameera!
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    <?php elseif ($_GET['status'] == 'updated'): ?>
-        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            Odeeffannoon barataa fooyya'eera!
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
+    <?php if (isset($_GET['status'])): ?>
+        <?php if ($_GET['status'] == 'success'): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Barataan milkaa'inaan galmaa'era!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php elseif ($_GET['status'] == 'deleted'): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Barataan haqameera!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php elseif ($_GET['status'] == 'updated'): ?>
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Odeeffannoon barataa fooyya'eera!
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
-<?php endif; ?>
 
     <div class="row">
-        <!-- Form Barataa Galmeessu (Kuufe Tokko Qofa) -->
+        <!-- Form Barataa Galmeessu -->
         <div class="col-md-4">
             <div class="card shadow-sm">
                 <div class="card-header bg-primary text-white">
@@ -65,7 +82,7 @@
             </div>
         </div>
 
-        <!-- Table Barattoota Agarsiisu -->
+        <!-- Table Barattoota Agarsiisu (Edit & Delete Button-oonni Asitti Argamu) -->
         <div class="col-md-8">
             <div class="card shadow-sm">
                 <div class="card-header bg-dark text-white">
@@ -98,6 +115,7 @@
                                     <td><?= htmlspecialchars($student['phone']); ?></td>
                                     <td><?= htmlspecialchars($student['course']); ?></td>
                                     <td>
+                                        <!-- Button Edit fi Delete -->
                                         <a href="edit.php?id=<?= $student['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
                                         <a href="process.php?delete_id=<?= $student['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Barataa kana haquu ni barbaaddaa?')">Delete</a>
                                     </td>
