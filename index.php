@@ -1,3 +1,5 @@
+<a href="manage_courses.php" class="btn btn-outline-success me-2">Manage Courses</a>
+<a href="add_teacher.php" class="btn btn-outline-primary me-2">Manage Teachers</a>
 <?php if (isset($_GET['status'])): ?>
     <?php if ($_GET['status'] == 'created'): ?>
         <div class="alert alert-success alert-dismissible fade show" role="alert">
